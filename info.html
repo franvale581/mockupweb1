@@ -1,0 +1,81 @@
+<!-- info.html (modificado) -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WEB MOCKUP</title>
+    <link rel="stylesheet" href="info-styles.css" />
+    <link rel="shortcut icon" href="./assets/logo/logo_transparent.png" type="image/x-icon" />
+    <link rel="stylesheet" href="mediaqueris-aux.css" />
+</head>
+
+<body>
+    <video muted loop playsinline preload="auto" id="background-video" style="
+      display: block;
+      opacity: 0;
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    ">
+        <source src="./assets/video/background2.mp4" type="video/mp4" />
+        Tu navegador no soporta video HTML5.
+    </video>
+
+    <div id="info-product"></div>
+
+    <script src="data.js"></script>
+    <script>
+        const container = document.getElementById("info-product");
+        const productId = localStorage.getItem("selectedProductId");
+        const product = gorras.find(p => p.id == productId);
+
+        if (product) {
+            container.innerHTML = `
+                <div class="info-wrapper">
+                    <button id="volverBtn" class="volver-btn">VOLVER</button>
+                    <h1>${product.name}</h1>
+                    <h3>${product.brand}</h3>
+                    <img id="main-image" src="${product.img}" alt="${product.name}" width="300" />
+                    <p>Precio: $${product.price}</p>
+                    <p>${product.descripcion || 'Descripción no disponible'}</p>
+                    <div class="info-images">
+                        ${(product.imagenesInfo || []).map(img => `<img class="thumb" src="${img}" width="150" />`).join('')}
+                    </div>
+                </div>
+            `;
+
+            const thumbs = container.querySelectorAll('.thumb');
+            const mainImage = container.querySelector('#main-image');
+            thumbs.forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    mainImage.src = thumb.src;
+                });
+            });
+
+            // Agregar listener al botón VOLVER
+            const volverBtn = document.getElementById('volverBtn');
+            volverBtn.addEventListener('click', () => {
+                sessionStorage.setItem('vieneDeInfo', 'true');
+                window.location.href = 'index.html';
+            });
+        } else {
+            container.innerHTML = "<p>Producto no encontrado</p>";
+        }
+    </script>
+
+    <script>
+        const bgVideo = document.getElementById("background-video");
+        window.addEventListener("DOMContentLoaded", () => {
+            bgVideo.style.opacity = "1";
+            bgVideo.play().catch(err => console.warn("No se pudo reproducir el video de fondo:", err));
+        });
+    </script>
+</body>
+
+</html>

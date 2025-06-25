@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Teko:wght@300..700&display=swap');
+
+:root {
+  --bg-black: #0f1013;
+  --bg-red: #af0e0b;
+  --white-grey: #edede9;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+  user-select: none;
+}
+
+body {
+  background-color: #08090a;
+  background-image: url('./assets/bg/asfalt-light.png');
+  background-repeat: repeat;
+  background-size: auto;
+}
+
+#info-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
+
+
+.info-wrapper {
+  width: 90%;
+  padding: 2rem;
+  border-radius: 16px;
+  color: #e0e1dd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Teko", sans-serif;
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.info-wrapper h1 {
+  font-size: 2.5rem;
+
+}
+
+.info-wrapper h3 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: #adb5bd;
+  font-style: italic;
+}
+
+.info-wrapper img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 3px;
+  margin: 1rem 0;
+}
+
+.info-wrapper .info-images {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.info-wrapper .info-images img {
+  width: 150px;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.info-wrapper .info-images img:hover {
+  transform: scale(1.05);
+}
+
+.info-wrapper p {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: 100;
+}
+
+.info-wrapper .volver-btn {
+  font-family: "Teko", sans-serif;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+  padding: 8px 38px;
+  background-color: #191a04;
+  color: #f8f9fa;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  letter-spacing: 2px;
+  border: none;
+}
+
+.info-wrapper a:hover {
+  background-color: #343a40;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-wrapper {
+  animation: fadeInUp 0.8s ease-out both;
+}

@@ -1,0 +1,705 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Teko:wght@300..700&display=swap');
+
+:root {
+    --bg-black: #0f1013;
+    --bg-red: #af0e0b;
+    --white-grey: #edede9;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+
+body {
+    background-color: black;
+}
+
+#main {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+
+#main.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+#main {
+  transition: opacity .3s ease, visibility .3s ease, transform .3s ease;
+}
+
+
+.intro-screen {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: opacity 1s ease;
+}
+
+#intro-video {
+    display: block;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 9;
+    transition: opacity 1s ease;
+}
+
+.enter-btn {
+    font-family: "Teko", sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    font-style: italic;
+    letter-spacing: 1px;
+    color: rgb(232, 235, 235);
+}
+
+
+/* Contenido encima del video utilizar z-index: 1 */
+
+.top-banner {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.658);
+    /* fondo negro */
+    color: var(--white-grey);
+    /* texto blanco */
+    font-family: "Teko", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+
+.scrolling-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll-left 15s linear infinite;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.header {
+    position: sticky;
+    top: 2rem;
+    margin-top: 2rem;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0.658);
+}
+
+/* Logo */
+.logo {
+    color: var(--white-grey);
+    text-align: center;
+    font-family: "Teko", sans-serif;
+}
+
+.logo-container {
+    height: 100%;
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+/*menu y estilos para js*/
+.menu-toggle {
+    margin-left: 1rem;
+    color: var(--white-grey);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Menú lateral oculto */
+.nav-menu {
+    position: fixed;
+    top: 7rem;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    padding-top: 2rem;
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.658);
+}
+
+.menu-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Menú visible */
+.nav-menu.open {
+    left: 0;
+}
+
+.nav-menu-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-family: "Teko", sans-serif;
+    color: var(--bg-black);
+    height: 6rem;
+    margin-bottom: 3rem;
+}
+
+/* Enlaces del menú */
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.nav-menu li {
+    padding: 15px 15px;
+}
+
+.nav-menu a {
+    color: var(--white-grey);
+    text-decoration: none;
+    display: block;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-family: "Teko", sans-serif;
+    text-transform: uppercase;
+    font-style: italic;
+}
+
+/* Asegura que el menú toggle esté por encima */
+.menu-toggle {
+    z-index: 1100;
+    cursor: pointer;
+}
+
+/*overlay*/
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.show-overlay {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/*cart label*/
+
+.cart-label {
+    margin-right: 1rem;
+}
+
+
+
+/* Carrito desplegable */
+
+.cart-icon {
+    font-weight: 600;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-right: 1rem;
+    color: var(--white-grey);
+    cursor: pointer;
+    position: relative;
+}
+
+.cart-bubble {
+    position: absolute;
+    top: -11px;
+    right: -11px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.445);
+    color: var(--bg-black);
+    font-size: 10px;
+    font-weight: 500;
+    height: 18px;
+    width: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1px;
+    border-radius: 50%;
+}
+
+.cart.open-cart {
+    right: 0;
+}
+
+
+.cart-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.cart {
+    position: fixed;
+    top: 7rem;
+    right: -450px;
+    width: 450px;
+    height: 100vh;
+    padding: 50px 30px;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    padding-top: 2rem;
+    transition: right 0.3s ease-in-out;
+    /* <- Cambiar 'left' por 'right' */
+    z-index: 1000;
+    font-family: "Teko", sans-serif;
+    background-color: rgba(0, 0, 0, 0.658);
+}
+
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/*OCULTAR BARRA DE SCROLL DEL CARRITO*/
+
+.cart::-webkit-scrollbar {
+    display: none;
+}
+
+.cart h2 {
+    color: var(--white-grey);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.empty-msg {
+    color: #e9ecef98;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.cart-item img {
+    height: 100px;
+    width: 100px;
+    border-radius: 2px;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 110px;
+    padding-left: 0px;
+}
+
+.item-title {
+    color: var(--white-grey);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.item-bid {
+    color: var(--white-grey);
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.item-price {
+    color: var(--white-grey);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.item-handler {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.quantity-handler {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 10px;
+    color: var(--white-grey);
+    font-weight: 400;
+}
+
+.item-quantity {
+    color: var(--white-grey);
+}
+
+.up {
+    background-color: transparent;
+    cursor: pointer;
+    border: 1px solid var(--white-grey);
+}
+
+.down {
+    background-color: transparent;
+    border: 1px solid var(--white-grey);
+    cursor: pointer;
+}
+
+
+.divider {
+    margin-top: 2rem;
+    border: 0.5px solid var(--white-grey);
+    width: 100%;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.cart-total p {
+    color: var(--white-grey);
+    font-weight: 500;
+}
+
+.cart-total span {
+    color: var(--white-grey);
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.btn-info,
+.btn-add,
+.btn-buy,
+.btn-delete {
+    cursor: pointer;
+    padding: 10px 35px;
+    height: 2.5rem;
+    color: var(--white-grey);
+    border-radius: 15px;
+    border: none;
+    transition: 0.3s all ease-out;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-family: "Teko", sans-serif;
+    text-transform: uppercase;
+}
+
+.btn-info,
+.btn-buy,
+.btn-add,
+.btn-delete {
+    background: var(--bg-black);
+}
+
+.btn-buy,
+.btn-delete {
+    width: 100%;
+}
+
+.btn-info:hover,
+.btn-add:hover,
+.btn-buy:hover,
+.btn-delete:hover {
+    background: var(--white-grey);
+    color: var(--bg-black);
+    transition: 0.3s all ease-in;
+}
+
+.btn-info {
+    text-align: center;
+    margin-top: 5px;
+    width: 117px;
+}
+
+/* products section */
+
+
+.products-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6rem 0 2rem 0;
+    flex-direction: column;
+}
+
+.products-section-title h2 {
+  font-family: "Teko", sans-serif;
+  color: var(--white-grey);
+  font-weight: 400;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+/* product styles card */
+
+.products-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    width: 100%;
+}
+
+.product {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Teko", sans-serif;
+    color: var(--white-grey);
+    background: rgba(46, 43, 43, 0.363);
+    padding: 2rem 1rem;
+    border-radius: 2px;
+}
+
+.product-img {
+    height: 20rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: .2s ease-out;
+}
+
+.product-img:hover {
+    transform: scale(1.03);
+    transition: .2s ease-in-out;
+}
+
+.product-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    flex-direction: column;
+}
+
+.product-name {
+    font-weight: 400;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+.created-by-product {
+    font-weight: 100;
+    margin-top: -10px;
+    font-style: italic;
+    color: rgba(236, 236, 236, 0.918);
+    font-size: 1.3rem;
+}
+
+.product-price {
+    font-size: 1.8rem;
+    font-weight: 100;
+    color: rgba(255, 255, 255, 0.877);
+}
+
+/* modal de agregado */
+
+.add-modal {
+  font-family: "Teko", sans-serif;
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color:#0f101380;
+  color: var(--white-grey);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  font-weight: bold;
+  transition: bottom 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+  z-index: 9999;
+}
+
+.add-modal.active-modal {
+  bottom: 30px;
+  opacity: 1;
+}
+
+/* footer */
+
+.footer {
+    width: 100%;
+    padding: 2rem 0;
+    height: 24rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.top-line {
+    width: 95%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.411);
+    padding: 1px;
+    border-radius: 5px;
+}
+
+.footer-top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 7rem;
+}
+
+.social-links-container {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-link a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    color: var(--white-grey);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link a:hover {
+    transform: scale(1.1);
+    color: rgba(255, 255, 255, 0.411);
+}
+
+.footer-logo h3 {
+    color: var(--white-grey);
+    font-family: "Teko", sans-serif;
+    font-size: 3.5rem;
+    font-style: italic;
+}
+
+.footer-mid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 0;
+}
+
+.footer-mid-title h3 {
+    color: #b8b8b8;
+    font-family: "Teko", sans-serif;
+    font-weight: 100;
+    font-size: 1.6rem;
+    font-style: italic;
+}
+
+.payment-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.payment-container li img {
+  width: 50px;
+  height: auto;
+  display: block;
+}
+
+.bottom-rights {
+    width: 100%;
+    background: var(--bg-black);
+    padding: .5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom-rights p {
+    font-family: "Teko", sans-serif;
+    color: #b8b8b8;
+    letter-spacing: 1px;
+    font-style: italic;
+    font-weight: 100;
+}
