@@ -127,3 +127,32 @@ body {
 .info-wrapper {
   animation: fadeInUp 0.8s ease-out both;
 }
+
+
+@media (max-width: 589px) {
+
+  #info-product {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  height: 130vh;
+  width: 100%;
+  padding-top: 2rem;
+}
+  
+
+.info-wrapper {
+  width: 100%;
+  padding: 0;
+  border-radius: 16px;
+  color: #e0e1dd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Teko", sans-serif;
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+}
